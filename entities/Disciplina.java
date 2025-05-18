@@ -9,9 +9,10 @@ public class Disciplina {
     private String codigo;
     private String nome;
     private int cargaHoraria;
+    private int turmas;
     private List<String> preRequisitos = new ArrayList<>();
 
-    public Disciplina(String codigo, String nome, int cargaHoraria) {
+    public Disciplina(String codigo, String nome, int cargaHoraria, int turmas) {
         if (!codigo.matches("[A-Z]{3}\\d{4}")) {
             throw new IllegalArgumentException("Código deve ter 3 letras e 4 números (ex: FGA0158)");
         }
@@ -21,6 +22,7 @@ public class Disciplina {
         this.codigo = codigo;
         this.nome = nome;
         this.cargaHoraria = cargaHoraria;
+        this.turmas = turmas;
     }
 
     public static void cadastrar(Disciplina disciplina) {
@@ -54,6 +56,10 @@ public class Disciplina {
     
     public String getNome() {
         return this.nome;
+    }
+
+    public int getTurmas() {
+        return this.turmas;
     }
 
 }    

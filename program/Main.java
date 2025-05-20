@@ -147,4 +147,76 @@ public class Main {
         System.out.println("\nDados de aluno atualizados!");
     }
     
+
+    private static void listarAlunos(){
+        System.out.println("\n---LISTA DE ALUNOS---");
+        List<Aluno> alunos = Aluno.listarTodos();
+
+        if (alunos.isEmpty()){
+            System.out.println("Nenhum aluno cadastrado.");
+            return; //early return 
+        }
+
+        for(Aluno aluno : alunos){
+            System.out.println("\nMatrícula: " + aluno.getMatricula());
+            System.out.println("Nome: " + aluno.getNome());
+            System.out.println("Curso: " + aluno.getCurso());
+            System.out.println("Tipo: " + (aluno instanceof AlunoEspecial ? "Especial" : "Normal"));
+            System.out.println("Disciplinas matriculadas: " + aluno.getDisciplinasMatriculadas());
+            System.out.println("Disciplinas concluídas: " + aluno.getDisciplinasConcluidas());
+        }
+    }
+
+    private static void matricularAluno(){
+        System.out.println("\n---MATRICULAR ALUNO---");
+        System.out.print("Matrícula: ");
+        String matricula = scanner.nextLine();
+
+        Aluno aluno = Aluno.buscarAlunoPorMatricula(matricula);
+
+        if(aluno == null){
+            System.out.println("Aluno não encontrado");
+            return; //volta para o menu do modo Aluno
+        }
+
+        System.out.println("\nTurmas disponíveis:");
+        List<Turma> turmas = Turma.getTodasTurmas();
+
+        for(Turma turma : turmas){
+            Disciplina disciplina = Disciplina.buscarPorCodigo(turma.getCodigoDisciplina());
+            System.out.println("\nTurma: " + turma.getNumeroTurma());
+            System.out.println("Disciplina: " + (disciplina != null ? disciplina.getNome() : "Desconhecida")); 
+            System.out.println("Horário: " + turma.getHorario());
+            System.out.println("Vagas disponíveis: " + (turma.getCapacidade() - turma.getMatriculas().size()));
+        }
+
+        System.out.print("\nNúmero da turma para matricular: ");
+        String numeroTurma = scanner.nextLine();
+        
+        Turma turma = Turma.buscarPorNumero(numeroTurma);
+        if (turma == null) {
+            System.out.println("Turma não encontrada!");
+            return;
+        }
+
+        Disciplina disciplina = Disciplina.buscarPorCodigo(turma.getCodigoDisciplina());
+        if (disciplina != null && !aluno.verificarPreRequisitos(disciplina.getPreRequisitos())) {
+            System.out.println("Aluno não possui os pré-requisitos necessários!");
+            return;
+        }
+                
+        try {
+            aluno.matricularDisciplina(disciplina.getCodigo()); 
+            
+            if (turma.matricularAluno(aluno.getMatricula())) {
+                System.out.println("Aluno matriculado com sucesso!");
+            } else {
+                System.out.println("Não há vagas disponíveis nesta turma!");
+                aluno.trancarDisciplina(disciplina.getCodigo());
+            }
+        } catch (IllegalStateException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+    }
+
 }

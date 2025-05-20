@@ -33,10 +33,11 @@ public class Disciplina {
     }
 
     public static Disciplina buscarPorCodigo(String codigo) {
-        return todasDisciplinas.stream()
-            .filter(d -> d.codigo.equals(codigo))
-            .findFirst()
-            .orElse(null);
+        for(Disciplina disciplina : todasDisciplinas){
+            if (disciplina.getCodigo().equals(codigo))
+            return disciplina;                
+        }
+        return null;
     }
     
     public void addPreRequisito(String codigoDisciplina) {
@@ -63,5 +64,3 @@ public class Disciplina {
     }
 
 }    
-
-

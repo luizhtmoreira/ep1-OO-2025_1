@@ -119,5 +119,32 @@ public class Main {
             System.out.println("Erro: " + e.getMessage());
         }
     }
+
+    private static void editarAluno(){
+        System.out.println("\n---EDITAR ALUNO---");
+        System.out.print("Matrícula: ");
+        String matricula = scanner.nextLine();
+
+        Aluno aluno = Aluno.buscarAlunoPorMatricula(matricula);
+
+        if(aluno == null){
+            System.out.println("Aluno não encontrado");
+            return; //volta para o menu do modo Aluno
+        }
+
+        System.out.println("\nDados atuais:");
+        System.out.println("Nome: " + aluno.getNome());
+        System.out.println("Curso: " + aluno.getCurso());
+
+        System.out.print("\nNovo nome: ");
+        String novoNome = scanner.nextLine();
+        aluno.setNome(novoNome);
+
+        System.out.print("Novo curso: ");
+        String novoCurso = scanner.nextLine();
+        aluno.setCurso(novoCurso);
+
+        System.out.println("\nDados de aluno atualizados!");
+    }
     
 }

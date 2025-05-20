@@ -8,7 +8,6 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        carregarDados();
         
         int opcao;
         do {
@@ -51,7 +50,8 @@ public class Main {
             System.out.println("3. Listar Alunos");
             System.out.println("4. Matricular em Disciplina");
             System.out.println("5. Trancar Disciplina");
-            System.out.println("6. Voltar ao Menu Principal");
+            System.out.println("6. Adicionar Disciplina Concluída");
+            System.out.println("7. Voltar ao Menu Principal");
             System.out.print("Escolha uma opção: ");
             
             opcao = scanner.nextInt();
@@ -74,12 +74,50 @@ public class Main {
                     trancarDisciplina();
                     break;
                 case 6:
+                    addDisciplinaConcluida();
+                    break;
+                case 7:
                     System.out.println("Retornando ao menu principal...");
                     break;
                 default:
                     System.out.println("Opção inválida!");
             }
-        } while (opcao != 6);
+        } while (opcao != 7);
+    }
+
+    private static void cadastrarAluno(){
+        System.out.println("\n---CADASTRAR ALUNO---");
+        System.out.print("Nome: ");
+        String nome = scanner.nextLine();
+
+        System.out.print("Matrícula (9 dígitos): ");
+        String matricula = scanner.nextLine();
+
+        System.out.print("Curso: ");
+        String curso = scanner.nextLine();
+
+        System.out.print("Tipo (1 = normal / 2 = especial): ");
+        int tipo = scanner.nextInt();
+        scanner.nextLine();
+
+        try{
+            Aluno aluno;
+            if (tipo == 1){
+                aluno = new AlunoNormal(nome, matricula, curso);
+            }
+            else if (tipo == 2){
+                aluno = new AlunoEspecial(nome, matricula, curso);
+            }
+            else{
+                System.out.println("Tipo inválido!");
+                return;
+            }
+
+            Aluno.cadastrar(aluno);
+            System.out.println("Aluno cadastrado!");
+        } catch (IllegalArgumentException e){
+            System.out.println("Erro: " + e.getMessage());
+        }
     }
     
 }

@@ -33,6 +33,14 @@ public abstract class Aluno {
         return new ArrayList<>(todosAlunos);
     }
 
+    public static Aluno buscarAlunoPorMatricula(String matricula){
+        for(Aluno aluno : todosAlunos){
+            if (aluno.getMatricula().equals(matricula))
+            return aluno;
+            }
+        return null;
+    }
+
     public abstract void matricularDisciplina(String codigoDisciplina);
     public abstract void trancarDisciplina(String codigoDisciplina);
 

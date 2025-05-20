@@ -219,4 +219,48 @@ public class Main {
         }
     }
 
+    private static void trancarDisciplina(){
+        System.out.println("\n---TRANCAR DISCIPLINA---");
+        System.out.print("Matrícula: ");
+        String matricula = scanner.nextLine();
+
+        Aluno aluno = Aluno.buscarAlunoPorMatricula(matricula);
+
+        if(aluno == null){
+            System.out.println("Aluno não encontrado");
+            return; //volta para o menu do modo Aluno
+        }
+        
+        List<String> disciplinas = aluno.getDisciplinasMatriculadas();
+        if (disciplinas.isEmpty()) {
+            System.out.println("Aluno não está matriculado em nenhuma disciplina.");
+            return;
+        }
+
+        System.out.println("\nDisciplinas matriculadas:");
+        for (String codigo : disciplinas){
+            Disciplina disciplina = Disciplina.buscarPorCodigo(codigo);
+            System.out.println(codigo + "-" + (disciplina != null ? disciplina.getNome() : "desconhecida"));
+        }
+
+        System.out.print("\nCódigo da disciplina para trancar: ");
+        String codigoDisciplina = scanner.nextLine();
+        
+        if (!disciplinas.contains(codigoDisciplina)) {
+            System.out.println("Aluno não está matriculado nesta disciplina!");
+            return;
+        }
+        
+        aluno.trancarDisciplina(codigoDisciplina);
+        
+        // Remover de todas as turmas da disciplina
+        for (Turma turma : Turma.getTodasTurmas()) {
+            if (turma.getCodigoDisciplina().equals(codigoDisciplina)) {
+                turma.getAlunosMatriculados().remove(aluno.getMatricula());
+            }
+        }
+        
+        System.out.println("Disciplina trancada com sucesso!");
+    }        
+
 }

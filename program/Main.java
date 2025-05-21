@@ -300,6 +300,43 @@ public class Main {
         System.out.println("Disciplina adicionada ao histórico");
     }
 
-
-
+    private static void modoDisciplinaTurma() {
+        int opcao;
+        do {
+            System.out.println("\n=== MODO DISCIPLINA/TURMA ===");
+            System.out.println("1. Cadastrar Disciplina");
+            System.out.println("2. Cadastrar Turma");
+            System.out.println("3. Listar Disciplinas");
+            System.out.println("4. Listar Turmas");
+            System.out.println("5. Adicionar Pré-requisito");
+            System.out.println("6. Voltar ao Menu Principal");
+            System.out.print("Escolha uma opção: ");
+            
+            opcao = scanner.nextInt();
+            scanner.nextLine(); // Limpar buffer
+            
+            switch (opcao) {
+                case 1:
+                    cadastrarDisciplina();
+                    break;
+                case 2:
+                    cadastrarTurma();
+                    break;
+                case 3:
+                    listarDisciplinas();
+                    break;
+                case 4:
+                    listarTurmas();
+                    break;
+                case 5:
+                    adicionarPreRequisito();
+                    break;
+                case 6:
+                    System.out.println("Retornando ao menu principal...");
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        } while (opcao != 6);
+    }    
 }

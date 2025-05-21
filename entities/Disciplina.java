@@ -63,4 +63,8 @@ public class Disciplina {
         return this.turmas;
     }
 
+    public static List<Disciplina> getTodasDisciplinas(){
+        return todasDisciplinas;
+    }
+
 }    

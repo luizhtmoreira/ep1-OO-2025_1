@@ -339,4 +339,38 @@ public class Main {
             }
         } while (opcao != 6);
     }    
+
+    private static void cadastrarDisciplina(){
+        System.out.println("---CADASTRAR DISCIPLINA---");
+        System.out.print("Código da disciplina: ");
+        String codigo = scanner.nextLine();
+
+        System.out.print("Nome: ");
+        String nome = scanner.nextLine();
+        
+        System.out.print("Carga horária: ");
+        int cargaHoraria = scanner.nextInt();
+        scanner.nextLine();
+        
+        System.out.print("Número de turmas: ");
+        int turmas = scanner.nextInt();
+        scanner.nextLine();
+
+        try{
+            Disciplina disciplina = new Disciplina(codigo, nome, cargaHoraria, turmas);
+            Disciplina.cadastrar(disciplina);
+            System.out.println("Disciplina cadastrada!");
+        } catch (IllegalArgumentException e){
+            System.out.println("Erro: " + e.getMessage());
+        }
+
+    }
+
+    private static void cadastrarTurma(){}
+
+    private static void listarDisciplinas(){}
+
+    private static void listarTurmas(){}
+
+    private static void adicionarPreRequisito(){}
 }

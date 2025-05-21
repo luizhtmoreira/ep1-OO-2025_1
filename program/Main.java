@@ -24,7 +24,6 @@ public class Main {
             switch (opcao) {
                 case 1:
                     modoAluno();
-                    break;
                 case 2:
                     modoDisciplinaTurma();
                     break;
@@ -262,5 +261,45 @@ public class Main {
         
         System.out.println("Disciplina trancada com sucesso!");
     }        
+
+    private static void addDisciplinaConcluida(){
+        System.out.println("\n---ADICIONAR DISCIPLINA CONCLUÍDA---");
+        System.out.print("Matrícula do aluno: ");
+        String matricula = scanner.nextLine();
+        
+        Aluno aluno = Aluno.buscarAlunoPorMatricula(matricula);
+
+        if(aluno == null){
+            System.out.println("Aluno não encontrado");
+            return; 
+        }
+
+        List<Disciplina> disciplinas = Disciplina.getTodasDisciplinas();
+
+        if(disciplinas.isEmpty()){
+            System.out.println("\nNenhuma disciplina cadastrada.");
+            return;
+        }
+
+        System.out.println("Disciplinas cadastradas:");
+        for(Disciplina disciplina : disciplinas){
+            System.out.println(disciplina.getCodigo() + "-" + disciplina.getNome());
+        }
+
+        System.out.print("Código da disciplina para adicionar: ");
+        String codigoDisciplina = scanner.nextLine();
+
+        Disciplina disciplina = Disciplina.buscarPorCodigo(codigoDisciplina);
+        if (disciplina == null){
+            System.out.println("Disciplina não encontrada");
+            return;
+        }
+
+        aluno.adicionarDisciplinaConcluida(codigoDisciplina);
+
+        System.out.println("Disciplina adicionada ao histórico");
+    }
+
+
 
 }

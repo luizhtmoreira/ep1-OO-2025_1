@@ -9,8 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
         
-        int opcao;
-        do {
+        boolean executando = true;
+        while(executando){
             System.out.println("\n=== SISTEMA ACADÊMICO FCTE ===");
             System.out.println("1. Modo Aluno");
             System.out.println("2. Modo Disciplina/Turma");
@@ -18,12 +18,13 @@ public class Main {
             System.out.println("4. Salvar e Sair");
             System.out.print("Escolha uma opção: ");
             
-            opcao = scanner.nextInt();
+            int opcao = scanner.nextInt();
             scanner.nextLine();
             
             switch (opcao) {
                 case 1:
                     modoAluno();
+                    break;
                 case 2:
                     modoDisciplinaTurma();
                     break;
@@ -33,16 +34,17 @@ public class Main {
                 case 4:
                     salvarDados();
                     System.out.println("Dados salvos. Saindo do sistema...");
+                    executando = false;
                     break;
                 default:
                     System.out.println("Opção inválida!");
             }
-        } while (opcao != 4);
+        }
     }
     
     private static void modoAluno() {
-        int opcao;
-        do {
+        boolean voltar = false;
+        while(!voltar){
             System.out.println("\n=== MODO ALUNO ===");
             System.out.println("1. Cadastrar Aluno");
             System.out.println("2. Editar Aluno");
@@ -53,7 +55,7 @@ public class Main {
             System.out.println("7. Voltar ao Menu Principal");
             System.out.print("Escolha uma opção: ");
             
-            opcao = scanner.nextInt();
+            int opcao = scanner.nextInt();
             scanner.nextLine(); // Limpar buffer
             
             switch (opcao) {
@@ -77,11 +79,12 @@ public class Main {
                     break;
                 case 7:
                     System.out.println("Retornando ao menu principal...");
+                    voltar = true;
                     break;
                 default:
                     System.out.println("Opção inválida!");
             }
-        } while (opcao != 7);
+        }
     }
 
     private static void cadastrarAluno(){
@@ -283,7 +286,7 @@ public class Main {
 
         System.out.println("Disciplinas cadastradas:");
         for(Disciplina disciplina : disciplinas){
-            System.out.println(disciplina.getCodigo() + "-" + disciplina.getNome());
+            System.out.println(disciplina.getCodigo() + " - " + disciplina.getNome());
         }
 
         System.out.print("Código da disciplina para adicionar: ");
@@ -301,8 +304,8 @@ public class Main {
     }
 
     private static void modoDisciplinaTurma() {
-        int opcao;
-        do {
+        boolean voltar = false;
+        while(!voltar){
             System.out.println("\n=== MODO DISCIPLINA/TURMA ===");
             System.out.println("1. Cadastrar Disciplina");
             System.out.println("2. Cadastrar Turma");
@@ -312,7 +315,7 @@ public class Main {
             System.out.println("6. Voltar ao Menu Principal");
             System.out.print("Escolha uma opção: ");
             
-            opcao = scanner.nextInt();
+            int opcao = scanner.nextInt();
             scanner.nextLine(); // Limpar buffer
             
             switch (opcao) {
@@ -333,15 +336,16 @@ public class Main {
                     break;
                 case 6:
                     System.out.println("Retornando ao menu principal...");
+                    voltar = true;
                     break;
                 default:
                     System.out.println("Opção inválida!");
             }
-        } while (opcao != 6);
+        }
     }    
 
     private static void cadastrarDisciplina(){
-        System.out.println("---CADASTRAR DISCIPLINA---");
+        System.out.println("\n---CADASTRAR DISCIPLINA---");
         System.out.print("Código da disciplina: ");
         String codigo = scanner.nextLine();
 
@@ -373,4 +377,9 @@ public class Main {
     private static void listarTurmas(){}
 
     private static void adicionarPreRequisito(){}
+
+
+    private static void modoAvaliacaoFrequencia(){}
+
+    private static void salvarDados(){}
 }

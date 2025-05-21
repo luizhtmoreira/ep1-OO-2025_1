@@ -12,7 +12,7 @@ public class Turma {
     private String sala;
     private String horario;
     private int capacidade;
-    private TipoTurma tipo;
+    public TipoTurma tipo;
     private TipoAvaliacao tipoAvaliacao;
     private List<String> matriculas = new ArrayList<>();
 
@@ -94,7 +94,7 @@ public class Turma {
         return matriculas;
     }
 
-    enum TipoAvaliacao { MEDIA_SIMPLES, MEDIA_PONDERADA }
-    enum TipoTurma { PRESENCIAL, REMOTA }
+    public enum TipoAvaliacao { MEDIA_SIMPLES, MEDIA_PONDERADA }
+    public enum TipoTurma { PRESENCIAL, REMOTA }
 
 }

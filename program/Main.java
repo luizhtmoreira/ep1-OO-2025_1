@@ -242,7 +242,7 @@ public class Main {
         System.out.println("\nDisciplinas matriculadas:");
         for (String codigo : disciplinas){
             Disciplina disciplina = Disciplina.buscarPorCodigo(codigo);
-            System.out.println(codigo + "-" + (disciplina != null ? disciplina.getNome() : "desconhecida"));
+            System.out.println(codigo + " - " + (disciplina != null ? disciplina.getNome() : "desconhecida"));
         }
 
         System.out.print("\nCódigo da disciplina para trancar: ");
@@ -370,13 +370,125 @@ public class Main {
 
     }
 
-    private static void cadastrarTurma(){}
+    private static void cadastrarTurma(){
+        System.out.println("\n=== CADASTRAR TURMA ===");
+        System.out.print("Código da disciplina: ");
+        String codigoDisciplina = scanner.nextLine();
+        
+        Disciplina disciplina = Disciplina.buscarPorCodigo(codigoDisciplina);
+        if (disciplina == null) {
+            System.out.println("Disciplina não encontrada!");
+            return;
+        }
 
-    private static void listarDisciplinas(){}
+        System.out.print("Nome do professor: ");
+        String nomeProfessor = scanner.nextLine();
+        Professor professor = new Professor(nomeProfessor);
+        
+        System.out.print("Número da turma: ");
+        String numeroTurma = scanner.nextLine();
+        
+        System.out.print("Semestre: ");
+        int semestre = scanner.nextInt();
+        scanner.nextLine();
+        
+        System.out.print("Sala (deixe em branco para turma remota): ");
+        String sala = scanner.nextLine();
+        
+        System.out.print("Horário: ");
+        String horario = scanner.nextLine();
+        
+        System.out.print("Capacidade: ");
+        int capacidade = scanner.nextInt();
+        scanner.nextLine();
+        
+        System.out.print("Tipo (1-Presencial / 2-Remota): ");
+        int tipo = scanner.nextInt();
+        scanner.nextLine();
+        
+        System.out.print("Forma de avaliação (1-Média Simples / 2-Média Ponderada): ");
+        int avaliacao = scanner.nextInt();
+        scanner.nextLine();
+        
+        try {
+            Turma.TipoTurma tipoTurma = tipo == 1 ? Turma.TipoTurma.PRESENCIAL : Turma.TipoTurma.REMOTA;
+            Turma.TipoAvaliacao tipoAvaliacao = avaliacao == 1 ? Turma.TipoAvaliacao.MEDIA_SIMPLES : Turma.TipoAvaliacao.MEDIA_PONDERADA;
+            
+            Turma turma = new Turma(numeroTurma, codigoDisciplina, semestre, 
+                                  sala.isEmpty() ? null : sala, horario, capacidade, 
+                                  tipoTurma, tipoAvaliacao, professor);
+            
+            Turma.cadastrar(turma);
+            System.out.println("Turma cadastrada com sucesso!");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+    }
 
-    private static void listarTurmas(){}
+    private static void listarDisciplinas() {
+        System.out.println("\n=== LISTA DE DISCIPLINAS ===");
+        
+        List<Disciplina> disciplinas = Disciplina.getTodasDisciplinas();
+        
+        if (disciplinas.isEmpty()) {
+            System.out.println("Nenhuma disciplina cadastrada.");
+            return;
+        }
+        
+        for (Disciplina disciplina : disciplinas) {
+            System.out.println("\nCódigo: " + disciplina.getCodigo());
+            System.out.println("Nome: " + disciplina.getNome());
+            System.out.println("Carga Horária: " + disciplina.getTotalAulas() + " horas");
+            System.out.println("Turmas: " + disciplina.getTurmas());
+            System.out.println("Pré-requisitos: " + disciplina.getPreRequisitos());
+        }
+    }
 
-    private static void adicionarPreRequisito(){}
+    private static void listarTurmas() {
+        System.out.println("\n=== LISTA DE TURMAS ===");
+        List<Turma> turmas = Turma.getTodasTurmas();
+        
+        if (turmas.isEmpty()) {
+            System.out.println("Nenhuma turma cadastrada.");
+            return;
+        }
+        
+        for (Turma turma : turmas) {
+            Disciplina disciplina = Disciplina.buscarPorCodigo(turma.getCodigoDisciplina());
+            System.out.println("\nTurma: " + turma.getNumeroTurma());
+            System.out.println("Disciplina: " + (disciplina != null ? disciplina.getNome() : "Desconhecida"));
+            System.out.println("Semestre: " + turma.getSemestre());
+            System.out.println("Sala: " + (turma.getSala() != null ? turma.getSala() : "Remota"));
+            System.out.println("Horário: " + turma.getHorario());
+            System.out.println("Capacidade: " + turma.getCapacidade() + " (Matriculados: " + turma.getMatriculas().size() + ")");
+            System.out.println("Tipo: " + turma.getTipo());
+            System.out.println("Avaliação: " + turma.getTipoAvaliacao());
+        }
+    }    
+
+    private static void adicionarPreRequisito() {
+        System.out.println("\n=== ADICIONAR PRÉ-REQUISITO ===");
+        System.out.print("Código da disciplina: ");
+        String codigoDisciplina = scanner.nextLine();
+        
+        Disciplina disciplina = Disciplina.buscarPorCodigo(codigoDisciplina);
+        if (disciplina == null) {
+            System.out.println("Disciplina não encontrada!");
+            return;
+        }
+        
+        System.out.print("Código da disciplina pré-requisito: ");
+        String codigoPreRequisito = scanner.nextLine();
+        
+        Disciplina preRequisito = Disciplina.buscarPorCodigo(codigoPreRequisito);
+        if (preRequisito == null) {
+            System.out.println("Disciplina pré-requisito não encontrada!");
+            return;
+        }
+        
+        disciplina.addPreRequisito(codigoPreRequisito);
+        System.out.println("Pré-requisito adicionado com sucesso!");
+    }
 
 
     private static void modoAvaliacaoFrequencia(){}

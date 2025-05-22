@@ -12,11 +12,12 @@ public class Turma {
     private String sala;
     private String horario;
     private int capacidade;
-    public TipoTurma tipo;
+    private TipoTurma tipo;
     private TipoAvaliacao tipoAvaliacao;
+    private Professor professor;
     private List<String> matriculas = new ArrayList<>();
 
-    public Turma(String numeroTurma, String codigoDisciplina, int semestre, String sala, String horario, int capacidade, TipoTurma tipo, TipoAvaliacao tipoAvaliacao) {
+    public Turma(String numeroTurma, String codigoDisciplina, int semestre, String sala, String horario, int capacidade, TipoTurma tipo, TipoAvaliacao tipoAvaliacao, Professor professor) {
         this.numeroTurma = numeroTurma;
         this.codigoDisciplina = codigoDisciplina;
         this.semestre = semestre;
@@ -25,6 +26,7 @@ public class Turma {
         this.capacidade = capacidade;
         this.tipo = tipo;
         this.tipoAvaliacao = tipoAvaliacao;
+        this.professor = professor;
     }
 
     public static void cadastrar(Turma turma) {
@@ -92,6 +94,14 @@ public class Turma {
 
     public List<String> getMatriculas() {
         return matriculas;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
     public enum TipoAvaliacao { MEDIA_SIMPLES, MEDIA_PONDERADA }

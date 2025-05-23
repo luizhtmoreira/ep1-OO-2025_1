@@ -230,7 +230,7 @@ public class Main {
 
         if(aluno == null){
             System.out.println("Aluno não encontrado");
-            return; //volta para o menu do modo Aluno
+            return; 
         }
         
         List<String> disciplinas = aluno.getDisciplinasMatriculadas();
@@ -255,7 +255,6 @@ public class Main {
         
         aluno.trancarDisciplina(codigoDisciplina);
         
-        // Remover de todas as turmas da disciplina
         for (Turma turma : Turma.getTodasTurmas()) {
             if (turma.getCodigoDisciplina().equals(codigoDisciplina)) {
                 turma.getAlunosMatriculados().remove(aluno.getMatricula());
@@ -414,9 +413,7 @@ public class Main {
             Turma.TipoTurma tipoTurma = tipo == 1 ? Turma.TipoTurma.PRESENCIAL : Turma.TipoTurma.REMOTA;
             Turma.TipoAvaliacao tipoAvaliacao = avaliacao == 1 ? Turma.TipoAvaliacao.MEDIA_SIMPLES : Turma.TipoAvaliacao.MEDIA_PONDERADA;
             
-            Turma turma = new Turma(numeroTurma, codigoDisciplina, semestre, 
-                                  sala.isEmpty() ? null : sala, horario, capacidade, 
-                                  tipoTurma, tipoAvaliacao, professor);
+            Turma turma = new Turma(numeroTurma, codigoDisciplina, semestre, sala.isEmpty() ? null : sala, horario, capacidade, tipoTurma, tipoAvaliacao, professor);
             
             Turma.cadastrar(turma);
             System.out.println("Turma cadastrada com sucesso!");
@@ -490,8 +487,36 @@ public class Main {
         System.out.println("Pré-requisito adicionado com sucesso!");
     }
 
-
-    private static void modoAvaliacaoFrequencia(){}
-
-    private static void salvarDados(){}
+    private static void modoAvaliacaoFrequencia(){
+        boolean voltar = false;
+        while(!voltar) {
+            System.out.println("\n=== MODO AVALIAÇÃO/FREQUÊNCIA ===");
+            System.out.println("1. Lançar Notas");
+            System.out.println("2. Lançar Frequência");
+            System.out.println("3. Gerar Relatórios");
+            System.out.println("4. Voltar ao Menu Principal");
+            System.out.print("Escolha uma opção: ");
+            
+            int opcao = scanner.nextInt();
+            scanner.nextLine(); // Limpar buffer
+            
+            switch (opcao) {
+                case 1:
+                    lancarNotas();
+                    break;
+                case 2:
+                    lancarFrequencia();
+                    break;
+                case 3:
+                    gerarRelatorios();
+                    break;
+                case 4:
+                    System.out.println("Retornando ao menu principal...");
+                    voltar = true;
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        }
+    }
 }

@@ -34,10 +34,12 @@ public class Turma {
     }
 
     public static Turma buscarPorNumero(String numeroTurma) {
-        return todasTurmas.stream()
-                .filter(t -> t.numeroTurma.equals(numeroTurma))
-                .findFirst()
-                .orElse(null);
+        for (Turma turma : todasTurmas) {
+            if (turma.numeroTurma.equals(numeroTurma)) {
+                return turma; 
+            }
+        }
+        return null; 
     }
     
     public boolean temVagas() {

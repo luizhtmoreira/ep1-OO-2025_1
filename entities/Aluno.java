@@ -12,6 +12,8 @@ public abstract class Aluno {
     private String curso;
     private List<String> disciplinasMatriculadas = new ArrayList<>();
     private List<String> disciplinasConcluidas = new ArrayList<>();
+    private List<Avaliacao> avaliacoes = new ArrayList<>();
+    private List<Frequencia> frequencias = new ArrayList<>();
 
     public Aluno(String nome, String matricula, String curso) {
         if(matricula == null || !matricula.matches("\\d{9}")){
@@ -38,6 +40,19 @@ public abstract class Aluno {
             if (aluno.getMatricula().equals(matricula))
             return aluno;
             }
+        return null;
+    }
+
+    public void adicionarFrequencia(Frequencia frequencia) {
+        this.frequencias.add(frequencia);
+    }
+
+    public Frequencia getFrequenciaPorTurma(String codigoTurma) {
+        for (Frequencia frequencia : frequencias) {
+            if (frequencia.getCodigoTurma().equals(codigoTurma)) {
+                return frequencia; 
+            }
+        }
         return null;
     }
 
@@ -84,5 +99,13 @@ public abstract class Aluno {
 
     public boolean verificarPreRequisitos(List<String> preRequisitos) {
         return disciplinasConcluidas.containsAll(preRequisitos);
+    }
+
+    public void adicionarAvaliacao(Avaliacao avaliacao) {
+        this.avaliacoes.add(avaliacao);
+    }
+
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
     }
 }

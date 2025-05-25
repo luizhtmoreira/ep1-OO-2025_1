@@ -613,5 +613,30 @@ public class Main {
         }
     }
 
+    private static void gerarRelatorios() {
+        System.out.println("\n=== GERAR RELATÓRIOS ===");
+        System.out.println("1. Relatório por Turma");
+        System.out.println("2. Relatório por Professor");
+        System.out.println("3. Boletim por Aluno");
+        System.out.print("Escolha uma opção: ");
+        
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
+        
+        switch (opcao) {
+            case 1:
+                relatorioPorTurma();
+                break;
+            case 2:
+                relatorioPorProfessor();
+                break;
+            case 3:
+                boletimPorAluno();
+                break;
+            default:
+                System.out.println("Opção inválida!");
+        }
+    }
+
     private static void salvarDados(){}
 }

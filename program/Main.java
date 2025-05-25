@@ -745,5 +745,53 @@ public class Main {
         }
     }
 
+    private static void boletimPorAluno() {
+        System.out.println("\n=== BOLETIM POR ALUNO ===");
+        System.out.print("Matrícula do aluno: ");
+        String matricula = scanner.nextLine();
+
+        Aluno aluno = Aluno.buscarAlunoPorMatricula(matricula);
+        
+        if (aluno == null) {
+            System.out.println("Aluno não encontrado!");
+            return;
+        }
+        
+        System.out.println("\n=== BOLETIM DE " + aluno.getNome().toUpperCase() + " ===");
+        System.out.println("Matrícula: " + aluno.getMatricula());
+        System.out.println("Curso: " + aluno.getCurso());
+        
+        System.out.println("\nDisciplinas matriculadas:");
+        for (String codigo : aluno.getDisciplinasMatriculadas()) {
+            Disciplina disciplina = Disciplina.buscarPorCodigo(codigo);
+            System.out.println("- " + codigo + ": " + (disciplina != null ? disciplina.getNome() : "Desconhecida"));
+        }
+        
+        System.out.println("\nNotas e situações por disciplina:");
+        for (Avaliacao avaliacao : aluno.getAvaliacoes()) {
+            Turma turma = Turma.buscarPorNumero(avaliacao.getCodigoTurma());
+            if (turma != null) {
+                Disciplina disciplina = Disciplina.buscarPorCodigo(turma.getCodigoDisciplina());
+                Frequencia frequencia = aluno.getFrequenciaPorTurma(turma.getNumeroTurma());
+                
+                double media = avaliacao.calcularMedia(turma.getTipoAvaliacao());
+                boolean aprovado = media >= 5.0 && 
+                                  (frequencia != null && frequencia.isAprovado());
+    
+                String frequenciaFormatada = "N/A";
+                if (frequencia != null) {
+                    double porcentagem = ((double) frequencia.getAulasPresente() / frequencia.getTotalAulas()) * 100;
+                    frequenciaFormatada = String.format("%.1f%%", porcentagem);
+                }
+    
+                System.out.println("\nTurma: " + turma.getNumeroTurma());
+                System.out.println("Disciplina: " + disciplina.getNome());
+                System.out.println("Média: " + media);
+                System.out.println("Frequência: " + frequenciaFormatada); 
+                System.out.println("Situação: " + (aprovado ? "APROVADO" : "REPROVADO"));
+            }
+        }
+    }
+
     private static void salvarDados(){}
 }

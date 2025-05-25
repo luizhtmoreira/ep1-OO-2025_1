@@ -570,7 +570,48 @@ public class Main {
         
         aluno.adicionarAvaliacao(avaliacao);
         System.out.println("Notas lançadas e salvas com sucesso!");
-    }    
+    }
+    
+    private static void lancarFrequencia() {
+        System.out.println("\n=== LANÇAR FREQUÊNCIA ===");
+        System.out.print("Número da turma: ");
+        String numeroTurma = scanner.nextLine();
+        
+        Turma turma = Turma.buscarPorNumero(numeroTurma);
+        if (turma == null) {
+            System.out.println("Turma não encontrada!");
+            return;
+        }
+        
+        System.out.print("Matrícula do aluno: ");
+        String matricula = scanner.nextLine();
+
+        Aluno aluno = Aluno.buscarAlunoPorMatricula(matricula);
+    
+        if (aluno == null) {
+            System.out.println("Aluno não encontrado!");
+            return;
+        }
+        
+        if (!turma.getAlunosMatriculados().contains(matricula)) {
+            System.out.println("Aluno não está matriculado nesta turma!");
+            return;
+        }
+        
+        Frequencia frequencia = new Frequencia(matricula, turma);
+        
+        System.out.print("Total de presenças (de " + frequencia.getTotalAulas() + " aulas): ");
+        int presencas = scanner.nextInt();
+        scanner.nextLine();
+        
+        try {
+            frequencia.setPresencas(presencas);
+            aluno.adicionarFrequencia(frequencia); 
+            System.out.println("Frequência lançada com sucesso!");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+    }
 
     private static void salvarDados(){}
 }

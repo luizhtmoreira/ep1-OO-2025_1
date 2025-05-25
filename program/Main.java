@@ -638,5 +638,54 @@ public class Main {
         }
     }
 
+    private static void relatorioPorTurma() {
+        System.out.println("\n=== RELATÓRIO POR TURMA ===");
+        System.out.print("Número da turma: ");
+        String numeroTurma = scanner.nextLine();
+        
+        Turma turma = Turma.buscarPorNumero(numeroTurma);
+        if (turma == null) {
+            System.out.println("Turma não encontrada!");
+            return;
+        }
+    
+        Disciplina disciplina = Disciplina.buscarPorCodigo(turma.getCodigoDisciplina());
+        List<String> matriculas = turma.getAlunosMatriculados();
+        int totalAlunos = matriculas.size();
+        int aprovados = 0;
+    
+        System.out.println("\n=== RELATÓRIO DA TURMA " + numeroTurma + " ===");
+        System.out.println("Disciplina: " + (disciplina != null ? disciplina.getNome() : "Desconhecida"));
+        System.out.println("Semestre: " + turma.getSemestre());
+        System.out.println("Total de alunos: " + totalAlunos);
+    
+        for (String matricula : matriculas) {
+            Aluno aluno = Aluno.buscarAlunoPorMatricula(matricula);
+            if (aluno == null) continue;
+    
+            Frequencia frequencia = aluno.getFrequenciaPorTurma(numeroTurma);
+            Avaliacao avaliacaoTurma = null;
+            
+            for (Avaliacao avaliacao : aluno.getAvaliacoes()) {
+                if (avaliacao.getCodigoTurma().equals(numeroTurma)) {
+                    avaliacaoTurma = avaliacao;
+                    break;
+                }
+            }
+    
+            boolean aprovado = false;
+            if (frequencia != null && avaliacaoTurma != null) {
+                double media = avaliacaoTurma.calcularMedia(turma.getTipoAvaliacao());
+                aprovado = media >= 5.0 && frequencia.isAprovado();
+            }
+    
+            if (aprovado) aprovados++;
+        }
+    
+        double taxaAprovacao = totalAlunos > 0 ? ((double) aprovados / totalAlunos) * 100 : 0;
+        System.out.println("\nAlunos aprovados: " + aprovados);
+        System.out.printf("Taxa de aprovação: %.1f%%\n", taxaAprovacao);
+    }
+
     private static void salvarDados(){}
 }

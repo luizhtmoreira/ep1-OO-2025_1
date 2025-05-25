@@ -687,5 +687,63 @@ public class Main {
         System.out.printf("Taxa de aprovação: %.1f%%\n", taxaAprovacao);
     }
 
+    private static void relatorioPorProfessor() {
+        System.out.println("\n=== RELATÓRIO POR PROFESSOR ===");
+        System.out.print("Nome do professor: ");
+        String nomeProfessor = scanner.nextLine();
+    
+        List<Turma> turmasProfessor = new ArrayList<>();
+        for (Turma turma : Turma.getTodasTurmas()) {
+            if (turma.getProfessor().getNome().equalsIgnoreCase(nomeProfessor)) {
+                turmasProfessor.add(turma);
+            }
+        }
+    
+        if (turmasProfessor.isEmpty()) {
+            System.out.println("Nenhuma turma encontrada para este professor!");
+            return;
+        }
+    
+        System.out.println("\n=== RELATÓRIO DO PROFESSOR " + nomeProfessor.toUpperCase() + " ===");
+        
+        for (Turma turma : turmasProfessor) {
+            Disciplina disciplina = Disciplina.buscarPorCodigo(turma.getCodigoDisciplina());
+            List<String> matriculas = turma.getAlunosMatriculados();
+            int totalAlunos = matriculas.size();
+            int aprovados = 0;
+    
+            System.out.println("\nTurma: " + turma.getNumeroTurma());
+            System.out.println("Disciplina: " + (disciplina != null ? disciplina.getNome() : "Desconhecida"));
+            
+            for (String matricula : matriculas) {
+                Aluno aluno = Aluno.buscarAlunoPorMatricula(matricula);
+                if (aluno == null) continue;
+    
+                Frequencia frequencia = aluno.getFrequenciaPorTurma(turma.getNumeroTurma());
+                Avaliacao avaliacaoTurma = null;
+        
+                for (Avaliacao avaliacao : aluno.getAvaliacoes()) {
+                    if (avaliacao.getCodigoTurma().equals(turma.getNumeroTurma())) {
+                        avaliacaoTurma = avaliacao;
+                        break;
+                    }
+                }
+    
+                boolean aprovado = false;
+                if (frequencia != null && avaliacaoTurma != null) {
+                    double media = avaliacaoTurma.calcularMedia(turma.getTipoAvaliacao());
+                    aprovado = media >= 5.0 && frequencia.isAprovado();
+                }
+    
+                if (aprovado) aprovados++;
+            }
+    
+            double taxaAprovacao = totalAlunos > 0 ? ((double) aprovados / totalAlunos) * 100 : 0;
+            System.out.println("Total de alunos: " + totalAlunos);
+            System.out.println("Aprovados: " + aprovados);
+            System.out.printf("Taxa de aprovação: %.1f%%\n", taxaAprovacao);
+        }
+    }
+
     private static void salvarDados(){}
 }

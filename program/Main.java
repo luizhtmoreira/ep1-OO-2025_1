@@ -519,4 +519,58 @@ public class Main {
             }
         }
     }
+
+    private static void lancarNotas() {
+        System.out.println("\n=== LANÇAR NOTAS ===");
+        System.out.print("Número da turma: ");
+        String numeroTurma = scanner.nextLine();
+        
+        Turma turma = Turma.buscarPorNumero(numeroTurma);
+        if (turma == null) {
+            System.out.println("Turma não encontrada!");
+            return;
+        }
+        
+        System.out.print("Matrícula do aluno: ");
+        String matricula = scanner.nextLine();
+        
+        if (!turma.getAlunosMatriculados().contains(matricula)) {
+            System.out.println("Aluno não está matriculado nesta turma!");
+            return;
+        }
+    
+        Aluno aluno = Aluno.buscarAlunoPorMatricula(matricula);
+        
+        if (aluno instanceof AlunoEspecial) {
+            System.out.println("Alunos especiais não recebem notas, apenas frequência!");
+            return;
+        }
+    
+        Avaliacao avaliacao = new Avaliacao(matricula, numeroTurma);
+        
+        Turma.TipoAvaliacao tipo = turma.getTipoAvaliacao();
+        
+        System.out.print("Nota P1: ");
+        avaliacao.setP1(scanner.nextDouble());
+        
+        System.out.print("Nota P2: ");
+        avaliacao.setP2(scanner.nextDouble());
+        
+        System.out.print("Nota P3: ");
+        avaliacao.setP3(scanner.nextDouble());
+        
+        if (tipo == Turma.TipoAvaliacao.MEDIA_PONDERADA) {
+            System.out.print("Nota Listas: ");
+            avaliacao.setListas(scanner.nextDouble());
+            
+            System.out.print("Nota Seminário: ");
+            avaliacao.setSeminario(scanner.nextDouble());
+        }
+        scanner.nextLine(); 
+        
+        aluno.adicionarAvaliacao(avaliacao);
+        System.out.println("Notas lançadas e salvas com sucesso!");
+    }    
+
+    private static void salvarDados(){}
 }

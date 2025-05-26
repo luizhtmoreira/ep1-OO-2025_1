@@ -26,8 +26,10 @@ public class Disciplina {
     }
 
     public static void cadastrar(Disciplina disciplina) {
-        if (todasDisciplinas.stream().anyMatch(d -> d.codigo.equals(disciplina.codigo))) {
-            throw new IllegalArgumentException("Código já existe!");
+        for (Disciplina d : todasDisciplinas) {
+            if (d.codigo.equals(disciplina.codigo)) {
+                throw new IllegalArgumentException("Código já existe!");
+            }
         }
         todasDisciplinas.add(disciplina);
     }

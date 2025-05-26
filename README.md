@@ -19,13 +19,31 @@ O enunciado do trabalho pode ser encontrado aqui:
 ## Instruções para Compilação e Execução
 
 1. **Compilação:**  
-   [Descrever aqui como compilar o projeto. Exemplo: `javac Main.java` ou o script usado]
+   Clone o repositório na sua máquina. Recomendo usar o vs code. Use o comando git clone https://github.com/luizhtmoreira/ep1-OO-2025_1
 
 2. **Execução:**  
-   [Descrever aqui como executar o projeto. Exemplo: `java Main` ou o script usado]
+   Execute o programa com o botão run java
 
 3. **Estrutura de Pastas:**  
-   [Descrever aqui as principais pastas do projeto]
+   Projeto ep1 eu/
+├── dados/
+├── entities/
+│           ├── Aluno.java
+│           ├── AlunoEspecial.java
+│           ├── AlunoNormal.java
+│           ├── Avaliacao.java
+│           ├── Disciplina.java
+│           ├── Frequencia.java
+│           ├── Matricula.java
+│           ├── Professor.java
+│           └── Turma.java
+├── fotos/
+|           ├─── FotoBoletimAluno.png
+|           ├─── FotoCadastroAluno.png
+|           └─── FotoMenuInicial.png   
+└── program/
+           ├─── Main.java
+           └─── Persistencia.java  
 
 3. **Versão do JAVA utilizada:**  
    [Descrever aqui como versão do JAVA utilizada no projeto. Sugestão: `java 21`]

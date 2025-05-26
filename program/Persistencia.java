@@ -95,4 +95,72 @@ public class Persistencia {
             System.out.println("ERRO ao carregar disciplinas: " + e.getMessage());
         }
     }
+
+    private static void carregarTurmas() {
+        if (!new File(ARQ_TURMAS).exists()) return;
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(ARQ_TURMAS))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(";");
+                Turma turma = new Turma(
+                    dados[0], dados[1], 
+                    Integer.parseInt(dados[2]), 
+                    dados[3].equals("null") ? null : dados[3], 
+                    dados[4], 
+                    Integer.parseInt(dados[5]), 
+                    Turma.TipoTurma.valueOf(dados[6]), 
+                    Turma.TipoAvaliacao.valueOf(dados[7]), 
+                    new Professor(dados[8])
+                );
+                Turma.cadastrar(turma);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar turmas: " + e.getMessage());
+        }
+    }
+
+    private static void carregarAvaliacoes() {
+        if (!new File(ARQ_AVALIACOES).exists()) return;
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(ARQ_AVALIACOES))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(";");
+                Avaliacao avaliacao = new Avaliacao(dados[0], dados[1]);
+                
+                avaliacao.setP1(Double.parseDouble(dados[2]));
+                avaliacao.setP2(Double.parseDouble(dados[3]));
+                avaliacao.setP3(Double.parseDouble(dados[4]));
+                avaliacao.setListas(Double.parseDouble(dados[5]));
+                avaliacao.setSeminario(Double.parseDouble(dados[6]));
+                
+                Aluno aluno = Aluno.buscarAlunoPorMatricula(dados[0]);
+                if (aluno != null) aluno.adicionarAvaliacao(avaliacao);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar avaliações: " + e.getMessage());
+        }
+    }
+
+    private static void carregarFrequencias() {
+        if (!new File(ARQ_FREQUENCIAS).exists()) return;
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(ARQ_FREQUENCIAS))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(";");
+                Frequencia frequencia = new Frequencia(
+                    dados[0], 
+                    Turma.buscarPorNumero(dados[1])
+                );
+                frequencia.setPresencas(Integer.parseInt(dados[2]));
+                
+                Aluno aluno = Aluno.buscarAlunoPorMatricula(dados[0]);
+                if (aluno != null) aluno.adicionarFrequencia(frequencia);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar frequências: " + e.getMessage());
+        }
+    }
 }

@@ -163,4 +163,112 @@ public class Persistencia {
             System.out.println("Erro ao carregar frequências: " + e.getMessage());
         }
     }
+
+    public static void salvarTodosDados() {
+        salvarAlunos();
+        salvarDisciplinas();
+        salvarTurmas();
+        salvarAvaliacoes();
+        salvarFrequencias();
+    }
+
+    private static void salvarAlunos() {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARQ_ALUNOS))) {
+            for (Aluno aluno : Aluno.listarTodos()) {
+                String tipo = aluno instanceof AlunoNormal ? "NORMAL" : "ESPECIAL";
+                String matriculadas = String.join(",", aluno.getDisciplinasMatriculadas());
+                String concluidas = String.join(",", aluno.getDisciplinasConcluidas());
+                
+                bw.write(String.join(";",
+                    aluno.getNome(),
+                    aluno.getMatricula(),
+                    aluno.getCurso(),
+                    tipo,
+                    matriculadas.isEmpty() ? "" : matriculadas,
+                    concluidas.isEmpty() ? "" : concluidas
+                ));
+                bw.newLine();
+            }
+        } catch (Exception e) {
+            System.out.println("ERRO ao salvar alunos: " + e.getMessage());
+        }
+    }
+
+    private static void salvarDisciplinas() {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARQ_DISCIPLINAS))) {
+            for (Disciplina disciplina : Disciplina.getTodasDisciplinas()) {
+                String preReq = String.join(",", disciplina.getPreRequisitos());
+                
+                bw.write(String.join(";",
+                    disciplina.getCodigo(),
+                    disciplina.getNome(),
+                    String.valueOf(disciplina.getTotalAulas()),
+                    String.valueOf(disciplina.getTurmas()),
+                    preReq.isEmpty() ? "" : preReq
+                ));
+                bw.newLine();
+            }
+        } catch (Exception e) {
+            System.out.println("ERRO ao salvar disciplinas: " + e.getMessage());
+        }
+    }
+
+    private static void salvarTurmas() {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARQ_TURMAS))) {
+            for (Turma turma : Turma.getTodasTurmas()) {
+                bw.write(String.join(";",
+                    turma.getNumeroTurma(),
+                    turma.getCodigoDisciplina(),
+                    String.valueOf(turma.getSemestre()),
+                    turma.getSala() != null ? turma.getSala() : "null",
+                    turma.getHorario(),
+                    String.valueOf(turma.getCapacidade()),
+                    turma.getTipo().name(),
+                    turma.getTipoAvaliacao().name(),
+                    turma.getProfessor().getNome()
+                ));
+                bw.newLine();
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar turmas: " + e.getMessage());
+        }
+    }
+
+    private static void salvarAvaliacoes() {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARQ_AVALIACOES))) {
+            for (Aluno aluno : Aluno.listarTodos()) {
+                for (Avaliacao avaliacao : aluno.getAvaliacoes()) {
+                    bw.write(String.join(";",
+                        avaliacao.getMatriculaAluno(),
+                        avaliacao.getCodigoTurma(),
+                        String.valueOf(avaliacao.getP1()),
+                        String.valueOf(avaliacao.getP2()),
+                        String.valueOf(avaliacao.getP3()),
+                        String.valueOf(avaliacao.getListas()),
+                        String.valueOf(avaliacao.getSeminario())
+                    ));
+                    bw.newLine();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar avaliações: " + e.getMessage());
+        }
+    }
+
+    private static void salvarFrequencias() {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARQ_FREQUENCIAS))) {
+            for (Aluno aluno : Aluno.listarTodos()) {
+                for (Frequencia frequencia : aluno.getFrequencias()) {
+                    bw.write(String.join(";",
+                        frequencia.getMatriculaAluno(),
+                        frequencia.getCodigoTurma(),
+                        String.valueOf(frequencia.getAulasPresente())
+                    ));
+                    bw.newLine();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar frequências: " + e.getMessage());
+        }
+    }
 }

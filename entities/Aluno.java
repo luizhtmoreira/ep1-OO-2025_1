@@ -25,8 +25,10 @@ public abstract class Aluno {
     }
     
     public static void cadastrar(Aluno aluno) {
-        if (todosAlunos.stream().anyMatch(a -> a.matricula.equals(aluno.matricula))) {
-            throw new IllegalArgumentException("Matrícula já existe!");
+        for (Aluno a : todosAlunos) {
+            if (a.matricula.equals(aluno.matricula)) {
+                throw new IllegalArgumentException("Matrícula já existe!");
+            }
         }
         todosAlunos.add(aluno);
     }
@@ -107,5 +109,9 @@ public abstract class Aluno {
 
     public List<Avaliacao> getAvaliacoes() {
         return avaliacoes;
+    }
+    
+    public List<Frequencia> getFrequencias() {
+        return frequencias;
     }
 }

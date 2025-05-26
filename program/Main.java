@@ -4,11 +4,12 @@ import entities.*;
 import java.util.*;
 
 public class Main {
-
+    
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        
+        carregarDados();
+
         boolean executando = true;
         while(executando){
             System.out.println("\n=== SISTEMA ACADÊMICO FCTE ===");
@@ -351,7 +352,7 @@ public class Main {
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
         
-        System.out.print("Carga horária: ");
+        System.out.print("Carga horária (informe apenas o número): ");
         int cargaHoraria = scanner.nextInt();
         scanner.nextLine();
         
@@ -793,5 +794,11 @@ public class Main {
         }
     }
 
-    private static void salvarDados(){}
+        private static void salvarDados() {
+            Persistencia.salvarTodosDados();
+        }
+
+        private static void carregarDados() {
+            Persistencia.carregarTodosDados();
+        }
 }

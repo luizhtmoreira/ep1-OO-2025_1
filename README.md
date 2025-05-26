@@ -41,27 +41,27 @@ O enunciado do trabalho pode ser encontrado aqui:
 ## Prints da Execução
 
 1. Menu Principal:  
-   ![Inserir Print 1](caminho/do/print1.png)
+   ![Inserir Print 1](fotos\FotoMenuInicial.png)
 
 2. Cadastro de Aluno:  
-   ![Inserir Print 2](caminho/do/print2.png)
+   ![Inserir Print 2](fotos\FotoCadastroAluno.png)
 
 3. Relatório de Frequência/Notas:  
-   ![Inserir Print 3](caminho/do/print3.png)
+   ![Inserir Print 3](fotos\FotoBoletimAluno.png)
 
 ---
 
 ## Principais Funcionalidades Implementadas
 
-- [ ] Cadastro, listagem, matrícula e trancamento de alunos (Normais e Especiais)
-- [ ] Cadastro de disciplinas e criação de turmas (presenciais e remotas)
-- [ ] Matrícula de alunos em turmas, respeitando vagas e pré-requisitos
-- [ ] Lançamento de notas e controle de presença
-- [ ] Cálculo de média final e verificação de aprovação/reprovação
-- [ ] Relatórios de desempenho acadêmico por aluno, turma e disciplina
-- [ ] Persistência de dados em arquivos (.txt ou .csv)
-- [ ] Tratamento de duplicidade de matrículas
-- [ ] Uso de herança, polimorfismo e encapsulamento
+- [✓] Cadastro, listagem, matrícula e trancamento de alunos (Normais e Especiais)
+- [✓] Cadastro de disciplinas e criação de turmas (presenciais e remotas)
+- [✓] Matrícula de alunos em turmas, respeitando vagas e pré-requisitos
+- [✓] Lançamento de notas e controle de presença
+- [✓] Cálculo de média final e verificação de aprovação/reprovação
+- [✓] Relatórios de desempenho acadêmico por aluno, turma e disciplina
+- [✓] Persistência de dados em arquivos (.txt ou .csv)
+- [✓] Tratamento de duplicidade de matrículas
+- [✓] Uso de herança, polimorfismo e encapsulamento
 
 ---
 

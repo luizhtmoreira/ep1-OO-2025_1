@@ -41,13 +41,13 @@ O enunciado do trabalho pode ser encontrado aqui:
 ## Prints da Execução
 
 1. Menu Principal:  
-   ![Inserir Print 1](fotos\FotoMenuInicial.png)
+   ![Inserir Print 1](https://github.com/luizhtmoreira/ep1-OO-2025_1/blob/main/fotos/FotoMenuInicial.png)
 
 2. Cadastro de Aluno:  
-   ![Inserir Print 2](fotos\FotoCadastroAluno.png)
+   ![Inserir Print 2](https://github.com/luizhtmoreira/ep1-OO-2025_1/blob/main/fotos/FotoCadastroAluno.png)
 
 3. Relatório de Frequência/Notas:  
-   ![Inserir Print 3](fotos\FotoBoletimAluno.png)
+   ![Inserir Print 3](https://github.com/luizhtmoreira/ep1-OO-2025_1/blob/main/fotos/FotoBoletimAluno.png)
 
 ---
 

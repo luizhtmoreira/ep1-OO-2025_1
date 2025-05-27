@@ -19,13 +19,14 @@ O enunciado do trabalho pode ser encontrado aqui:
 ## Instruções para Compilação e Execução
 
 1. **Compilação:**  
-   Clone o repositório na sua máquina. Recomendo usar o vs code. Use o comando git clone https://github.com/luizhtmoreira/ep1-OO-2025_1
+   Clone o repositório na sua máquina. Recomendo usar o vs code. Use o comando ```git clone https://github.com/luizhtmoreira/ep1-OO-2025_1```
 
 2. **Execução:**  
    Execute o programa com o botão run java
 
 3. **Estrutura de Pastas:**  
-```Projeto ep1 eu/
+```
+Projeto ep1 eu/
 ├── dados/
 │   ├── alunos.txt
 │   ├── avaliacoes.txt
@@ -48,7 +49,8 @@ O enunciado do trabalho pode ser encontrado aqui:
 │   └── FotoMenuInicial.png
 └── program/
     ├── Main.java
-    └── Persistencia.java```
+    └── Persistencia.java
+```
 3. **Versão do JAVA utilizada:**  
    java 21.0.6
 

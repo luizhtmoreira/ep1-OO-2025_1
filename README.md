@@ -90,7 +90,7 @@ Projeto ep1 eu/
 ---
 
 ## Observações (Extras ou Dificuldades)
-
+```
 - Funcionalidades extra:
    1.Tratamento de excessões.
    2.Interface intuitiva.
@@ -99,6 +99,7 @@ Projeto ep1 eu/
    2.Foi o primeiro projeto dessa escala que eu fiz, então conseguir fazer tudo funcionar bem em conjunto e não me perder foi um desafio.
 - Observação:
    1.Foi uma experiência divertida, consegui notar que meu aprendizado foi grande por ser um projeto desafiador e que me tirou da zona de conforto.
+```
 ---
 
 ## Contato

@@ -58,7 +58,7 @@ Projeto ep1 eu/
 
 ## Vídeo de Demonstração
 
-- [Inserir o link para o vídeo no YouTube/Drive aqui]
+- https://youtu.be/b618LNZGrmE
 
 ---
 
@@ -91,8 +91,14 @@ Projeto ep1 eu/
 
 ## Observações (Extras ou Dificuldades)
 
-- [Espaço para o aluno comentar qualquer funcionalidade extra que implementou, dificuldades enfrentadas, ou considerações importantes.]
-
+- Funcionalidades extra:
+   1.Tratamento de excessões.
+   2.Interface intuitiva.
+- Dificuldades:
+   1.Tive uma certa dificuldade no começo ao tentar relacionar as classes de forma que não desse erros no código.
+   2.Foi o primeiro projeto dessa escala que eu fiz, então conseguir fazer tudo funcionar bem em conjunto e não me perder foi um desafio.
+- Observação:
+   1.Foi uma experiência divertida, consegui notar que meu aprendizado foi grande por ser um projeto desafiador e que me tirou da zona de conforto.
 ---
 
 ## Contato

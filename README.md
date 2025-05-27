@@ -25,28 +25,32 @@ O enunciado do trabalho pode ser encontrado aqui:
    Execute o programa com o botão run java
 
 3. **Estrutura de Pastas:**  
-   Projeto ep1 eu/
+```Projeto ep1 eu/
 ├── dados/
+│   ├── alunos.txt
+│   ├── avaliacoes.txt
+│   ├── disciplinas.txt
+│   ├── frequencias.txt
+│   └── turmas.txt
 ├── entities/
-│           ├── Aluno.java
-│           ├── AlunoEspecial.java
-│           ├── AlunoNormal.java
-│           ├── Avaliacao.java
-│           ├── Disciplina.java
-│           ├── Frequencia.java
-│           ├── Matricula.java
-│           ├── Professor.java
-│           └── Turma.java
+│   ├── Aluno.java
+│   ├── AlunoEspecial.java
+│   ├── AlunoNormal.java
+│   ├── Avaliacao.java
+│   ├── Disciplina.java
+│   ├── Frequencia.java
+│   ├── Matricula.java
+│   ├── Professor.java
+│   └── Turma.java
 ├── fotos/
-|           ├─── FotoBoletimAluno.png
-|           ├─── FotoCadastroAluno.png
-|           └─── FotoMenuInicial.png   
+│   ├── FotoBoletimAluno.png
+│   ├── FotoCadastroAluno.png
+│   └── FotoMenuInicial.png
 └── program/
-           ├─── Main.java
-           └─── Persistencia.java  
-
+    ├── Main.java
+    └── Persistencia.java```
 3. **Versão do JAVA utilizada:**  
-   [Descrever aqui como versão do JAVA utilizada no projeto. Sugestão: `java 21`]
+   java 21.0.6
 
 ---
 
